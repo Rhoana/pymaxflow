@@ -1,4 +1,4 @@
-This is a simple Cython wrapper around the MAXFLOW lirbary from Boykov
+This is a simple Cython wrapper around the MAXFLOW library from Boykov
 and Kolmogorov.  Their original README and License information are
 included below.  Cython wrapper by Thouis (Ray) Jones.
 
