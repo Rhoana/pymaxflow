@@ -20,7 +20,7 @@ cdef class PyGraph:
         self.thisptr = new Graph[float,float,float](node_num_max, edge_num_max)
     def __dealloc__(self):
         del self.thisptr
-    def add_node(self, int num):
+    def add_node(self, int num=1):
         return self.thisptr.add_node(num)
     def add_edge(self, int i, int j, float cap, float rev_cap):
         self.thisptr.add_edge(i, j, cap, rev_cap)
