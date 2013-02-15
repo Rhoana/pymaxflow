@@ -1,3 +1,11 @@
+This is a simple Cython wrapper around the MAXFLOW lirbary from Boykov
+and Kolmogorov.  Their original README and License information are
+included below.  Cython wrapper by Thouis (Ray) Jones.
+
+
+
+
+
 ###################################################################
 #                                                                 #
 #    MAXFLOW - software for computing mincut/maxflow in a graph   #
