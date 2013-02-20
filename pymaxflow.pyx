@@ -1,6 +1,10 @@
 # distutils: language = c++
 # distutils: sources = maxflow.cpp graph.cpp
 
+import numpy as np
+cimport numpy as np
+cimport cython
+
 cdef extern from "Graph.h":
     cdef cppclass Block[T]:
         pass
@@ -13,6 +17,7 @@ cdef extern from "Graph.h":
         void add_tweights(int i, tcapT cap_source, tcapT cap_sink)
         flowT maxflow()
         termtype what_segment(int i)
+        int get_node_num()
 
 cdef class PyGraph:
     cdef Graph[float,float,float] *thisptr      # hold a C++ instance which we're wrapping
@@ -30,3 +35,32 @@ cdef class PyGraph:
         return self.thisptr.maxflow()
     def what_segment(self, int i):
         return self.thisptr.what_segment(i)
+
+    @cython.boundscheck(False)
+    def add_edge_vectorized(self,
+                            np.ndarray[dtype=np.int32_t, ndim=1, negative_indices=False, mode='c'] i,
+                            np.ndarray[dtype=np.int32_t, ndim=1, negative_indices=False, mode='c'] j,
+                            np.ndarray[dtype=np.float32_t, ndim=1, negative_indices=False, mode='c'] cap,
+                            np.ndarray[dtype=np.float32_t, ndim=1, negative_indices=False, mode='c'] rev_cap):
+        assert i.size == j.size
+        assert i.size == cap.size
+        assert i.size == rev_cap.size
+        cdef int l
+        for l in range(i.size):
+            self.thisptr.add_edge(i[l], j[l], cap[l], rev_cap[l])
+
+    def add_tweights_vectorized(self,
+                            np.ndarray[dtype=np.int32_t, ndim=1, negative_indices=False, mode='c'] i,
+                            np.ndarray[dtype=np.float32_t, ndim=1, negative_indices=False, mode='c'] cap_source,
+                            np.ndarray[dtype=np.float32_t, ndim=1, negative_indices=False, mode='c'] cap_sink):
+        assert i.size == cap_source.size
+        assert i.size == cap_sink.size
+        cdef int l
+        for l in range(i.size):
+            self.thisptr.add_tweights(i[l], cap_source[l], cap_sink[l])
+
+    def what_segment_vectorized(self):
+        cpdef np.ndarray[dtype=np.int32_t, ndim=1, negative_indices=False, mode='c'] out_segments = np.empty(self.thisptr.get_node_num(), np.int32)
+        cdef int l
+        for l in range(self.thisptr.get_node_num()):
+            out_segments[l] = self.thisptr.what_segment(l)
