@@ -5,7 +5,7 @@ import numpy as np
 cimport numpy as np
 cimport cython
 
-cdef extern from "Graph.h":
+cdef extern from "graph.h":
     cdef cppclass Block[T]:
         pass
     cdef enum termtype:
