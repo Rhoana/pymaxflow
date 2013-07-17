@@ -1,5 +1,5 @@
-include CHANGES.TXT
-include README.TXT
+include CHANGES.txt
+include README.txt
 include block.h
 include graph.cpp
 include graph.h
