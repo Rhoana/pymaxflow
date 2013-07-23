@@ -2,7 +2,38 @@ This is a simple Cython wrapper around the MAXFLOW library from Boykov
 and Kolmogorov.  Their original README and License information are
 included below.  Cython wrapper by Thouis (Ray) Jones.
 
+Installation
+============
 
+Requirements
+------------
+
+- cython (version 0.19.1 works, version 0.16 not)
+- numpy
+- matplotlib (only for example test.py)
+
+Installation with Pip
+---------------------
+
+$ pip install git+<repository clone url from the github sidebar>#egg=pymaxflow
+
+Manual Installation
+-------------------
+- download the package
+
+$ python setup.py build_ext --inplace
+
+install the package with pip (can be uninstalled)
+$ pip install .
+
+or install the package with distutils 
+$ python setup.py install
+
+Test the Package
+----------------
+
+$ python test.py someimage.png
+... figure with input image segmentation should pop up
 
 
 
