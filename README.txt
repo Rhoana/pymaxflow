@@ -5,20 +5,36 @@ included below.  Cython wrapper by Thouis (Ray) Jones.
 Installation
 ============
 
-Requirements:
+Requirements
+------------
+
 - cython (version 0.19.1 works, version 0.16 not)
 - numpy
 - matplotlib (only for example test.py)
 
+Installation with Pip
+---------------------
+
+$ pip install git+<repository clone url from the github sidebar>#egg=pymaxflow
+
+Manual Installation
+-------------------
+- download the package
+
 $ python setup.py build_ext --inplace
-$ python test.py someimage.png
-... figure with input image segmentation should pop up
 
 install the package with pip (can be uninstalled)
 $ pip install .
 
-install the package with distutils 
+or install the package with distutils 
 $ python setup.py install
+
+Test the Package
+----------------
+
+$ python test.py someimage.png
+... figure with input image segmentation should pop up
+
 
 
 ###################################################################
