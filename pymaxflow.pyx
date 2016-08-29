@@ -8,15 +8,15 @@ cimport cython
 cdef extern from "graph.h":
     cdef cppclass Block[T]:
         pass
-    cdef enum termtype:
-        SOURCE, SINK
+    cdef int SOURCE
+    cdef int SINK
     cdef cppclass Graph[capT, tcapT, flowT]:
         Graph(int node_num_max, int edge_num_max) except +
         int add_node(int)
         void add_edge(int i, int j, capT cap, capT rev_cap)
         void add_tweights(int i, tcapT cap_source, tcapT cap_sink)
         flowT maxflow()
-        termtype what_segment(int i)
+        int what_segment(int i)
         int get_node_num()
 
 cdef class PyGraph:
