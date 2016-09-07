@@ -8,8 +8,6 @@ cimport cython
 cdef extern from "graph.h":
     cdef cppclass Block[T]:
         pass
-    cdef int SOURCE
-    cdef int SINK
     cdef cppclass Graph[capT, tcapT, flowT]:
         Graph(int node_num_max, int edge_num_max) except +
         int add_node(int)
@@ -18,6 +16,12 @@ cdef extern from "graph.h":
         flowT maxflow()
         int what_segment(int i)
         int get_node_num()
+
+# Hard coded here, because I can't figure out how to get at enums nested in C++
+# classes in Cython.
+SOURCE = 0
+SINK = 1
+
 
 cdef class PyGraph:
     cdef Graph[float,float,float] *thisptr      # hold a C++ instance which we're wrapping

@@ -34,7 +34,7 @@ g.add_edge_vectorized(e1, e2, diffs, 0 * diffs)
 g.add_tweights_vectorized(indices[:, 0], (np.ones(indices.shape[0]) * 1.e9).astype(np.float32), np.zeros(indices.shape[0], np.float32))
 g.add_tweights_vectorized(indices[:, -1], np.zeros(indices.shape[0], np.float32), (np.ones(indices.shape[0]) * 1.e9).astype(np.float32))
 
-print "calling maxflow"
+print("calling maxflow")
 g.maxflow()
 
 out = g.what_segment_vectorized()
